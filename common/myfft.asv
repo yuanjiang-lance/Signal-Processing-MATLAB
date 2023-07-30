@@ -11,8 +11,7 @@ function [f, ffty_Sig, fft_Sig] = myfft(Sig, SampFreq)
 %  ffty_Sig: the amplitude of FFT results, column listed
 %  fft_Sig: FFT results, column listed
 %
-% Author: Yuan JIANG
-% Time: 2023-07-30
+% 
 
 NN = size(Sig, 1);
 f = (0:NN-1)' * SampFreq/NN;
@@ -25,3 +24,12 @@ end
 fft_Sig = fft(Sig)/NN;
 fft_Sig = fft_Sig(1: floor(NN/2), :);
 ffty_Sig = abs(fft_Sig);
+
+if nargin>2 && strcmp(figure, 'on')
+    figure;
+    set(gcf, 'position', [750 400 450 250], 'color', 'w');
+    plot(f, ffty_Sig, 'b-', 'linewidth', 1);
+    xlabel('Frequency/Hz', 'FontName', 'Times New Roman');
+    ylabel('Amplitude/g', 'FontName', 'Times New Roman');
+    set(gca, 'FontSize', 14, 'LineWidth', 1, 'FontName', 'Times New Roman');
+end
