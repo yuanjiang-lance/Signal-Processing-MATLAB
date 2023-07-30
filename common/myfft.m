@@ -7,7 +7,7 @@ function [f, ffty_Sig, fft_Sig] = myfft(Sig, SampFreq)
 %  SampFreq: sampling frequency (Hz)
 %
 % ------- Output --------
-%  f: Frequency bins (0: Fs/2)
+%  f: frequency bins (0: Fs/2)
 %  ffty_Sig: the amplitude of FFT results, column listed
 %  fft_Sig: FFT results, column listed
 %
