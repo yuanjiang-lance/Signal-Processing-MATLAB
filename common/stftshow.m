@@ -1,6 +1,6 @@
 function stftshow(t, Freq, Spec)
 %
-% Showing time-freuqncy representation
+% Showing time-frequency representation (TFR), such as STFT
 %
 % ---------- Input ------------
 %  t: time bins
