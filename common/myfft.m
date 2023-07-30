@@ -11,6 +11,8 @@ function [f, ffty_Sig, fft_Sig] = myfft(Sig, SampFreq)
 %  ffty_Sig: the amplitude of FFT results, column listed
 %  fft_Sig: FFT results, column listed
 %
+% Column listed means a group of signal or result lies in one column.
+%
 % Author: Yuan JIANG
 % Time: 2023-07-30
 
