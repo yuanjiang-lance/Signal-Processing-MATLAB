@@ -6,7 +6,7 @@ function [Spec, f, t] = mySTFT(Sig, SampFreq, Nfbin, WinLen)
 %  Sig: the signal to be analyzed
 %  SampFreq: sampling frequency (Hz)
 %  Nfbin: the number of frequency bins 
-%  WinLen: the window lenth to locate signal in time domain
+%  WinLen: the window length to locate signal in time domain
 %
 % ---------- Output -----------
 %  Spec: the STFT spectrum
@@ -45,9 +45,7 @@ end
 
 Spec = fftshift(fft(Spec),1); % Calculating the Fourier Transform of each windowed signal and shifting the results.
 
-[nLevel, SigLen] = size(Spec);
-
-f = linspace(-SampFreq/2,SampFreq/2,nLevel);
+f = linspace(-SampFreq/2,SampFreq/2, N);
 t = (0: SigLen-1)/SampFreq;
 
 Spec = Spec(end-Nfbin+1:end,:);
