@@ -8,7 +8,7 @@ function stftshow(t, Freq, Spec)
 %  Spec: time-frequency spectrum
 %  
 % Author: Yuan JIANG
-% Time: 2023-07-30
+% Time: 2023-08-31
 
 figure
 imagesc(t, Freq, abs(Spec));
@@ -18,9 +18,9 @@ colormap (JET);
 box on;
 colorbar off;
 set(gcf,'position',[846.6,340.2,414.4,364]);
-set(gca,'linewidth',1.5,'fontsize',18,'fontname','Times New Roman');
-xlabel('Time (s)','FontSize',18);
-ylabel('Frequency (Hz)','FontSize',18);
+set(gca,'linewidth',1.5,'fontsize',14,'fontname','Times New Roman');
+xlabel('Time (s)','FontSize',14);
+ylabel('Frequency (Hz)','FontSize',14);
 axis([0 t(end)+0.05 0 Freq(end)]);  % constrain the TFR showing range, could be modified
 view(0,90);
 set(gca,'YDir','normal');
