@@ -63,5 +63,5 @@ while (sDif > tol && it <= maxit)
     Kmdoub = Km' * Km;
     
     % updating demodulated sigals
-    ym = (1/tao * PHIdoub + Kmdoub) \ (Km' * Sig(:));
+    ym = (1/tao * PHIdoub + Kmdoub) \ (Km' * Sig(:)); 
     
