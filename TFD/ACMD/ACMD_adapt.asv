@@ -1,6 +1,6 @@
 function [IFest, Sigest, IAest, taorec] = ACMD_adapt(Sig, Fs, iniIF, tao0, mu, tol, maxit)
 %
-% Adaptive Chipr Mode Decomposition (ACMD) with bandwidth adaptation
+% Adaptive Chipr Mode Decomposition (ACMD)
 %
 % ------------- Input ---------------
 %  Sig: measured signal, one row/colum vector
@@ -30,8 +30,7 @@ if narin < 7, maxit = 300; end
 if length(Sig) ~= length(iniIF)
     error('The length of measured signal and initial IF must be equal!');
 end
-if size(Sig, 1) > size(Sig, 2), Sig = Sig.'; end
-if size(iniIF, 1) > size(iniIF, 2), iniIF = iniIF.'; end
+if size(Sig, 1) > size(Sig, 2), Sig = Sig.'; ends
 
 N = length(Sig);    % signal length (must equal to length(iniIF))
 t = (0: N-1) / Fs;
@@ -90,7 +89,6 @@ while (sDif > tol && it <= maxit)
 end
 
 it = it - 1;    % final iteration
-IFest = IFitset(it, :);   % estimated IF
-Sigest = Sigitset(it, :); % estimated signal component
-IAest = sqrt(alpham.^2 + betam.^2); % estimated IA
-taorec = taorec(1: it);
+IFest = IFitset(iter, :);   % estimated IF
+Sigest = Sigitset(iter, :); % estimated signal component
+IAest = 

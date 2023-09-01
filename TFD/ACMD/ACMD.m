@@ -1,13 +1,15 @@
-function [IFest, Sigest, IAest, taorec] = ACMD_adapt(Sig, Fs, iniIF, tao0, mu, tol, maxit)
+function [IFest, Sigest, IAest] = ACMD(Sig, Fs, iniIF, tao, mu, tol, maxit)
 %
-% Adaptive Chipr Mode Decomposition (ACMD) with bandwidth adaptation
+% Adaptive Chipr Mode Decomposition (ACMD) without bandwidth adaptation
+%
+% If you want to use ACMD with bandwidth adaptation, please turn to ACMD_adapt.m
 %
 % ------------- Input ---------------
 %  Sig: measured signal, one row/colum vector
 %  Fs: sampling frequency (Hz)
 %  iniIF: initial instaneous frequency (IF), one row/column vector
 %         ATTENTION: The length of iniIF and Sig must be equal
-%  tao0: initial bandwidth controlling parameter, smaller tao0 results in narrower bandwidth     
+%  tao: bandwidth controlling parameter, smaller tao0 results in narrower bandwidth     
 %  mu: IF smooth degree controlling parameter, smaller mu results in smoother IF result
 %  tol: iteration stopping criterion
 %  maxit: maximum iteration number to avoid dead loop, default 300
@@ -16,7 +18,6 @@ function [IFest, Sigest, IAest, taorec] = ACMD_adapt(Sig, Fs, iniIF, tao0, mu, t
 %  IFest: estimated IF
 %  Sigest: estimated signal mode
 %  IAest: estimated instantanous amplitude (IA), equivalent to the envelope
-%  taorec: the recording of tao (bandwidth controlling parameter) in each iteration
 %
 % Notations of each parameter and variable align with the notations in
 % original paper, which helps users to better understanding the core
@@ -52,7 +53,6 @@ taorec = zeros(1, maxit);
 it = 1;
 sDif = tol + 1; % sDif is the energy difference between two consecutive iterations
 IF = iniIF;
-tao = tao0;
 
 while (sDif > tol && it <= maxit)
     
@@ -77,10 +77,6 @@ while (sDif > tol && it <= maxit)
     IF = IF + (1/mu*Ddoub + speye(N)) \ dIF';
     IFitset(it, :) = IF;
     
-    % bandwith adaptation
-    tao = tao * (Sigm'*Sigm) / (Sigm'*Sig(:));
-    taorec(it) = tao;
-    
     % convergence criterion
     if it > 1
         sDif = (norm(Sigitset(it,:) - Sigitset(it-1,:)) / norm(Sigitset(it-1,:))).^2;
@@ -93,4 +89,3 @@ it = it - 1;    % final iteration
 IFest = IFitset(it, :);   % estimated IF
 Sigest = Sigitset(it, :); % estimated signal component
 IAest = sqrt(alpham.^2 + betam.^2); % estimated IA
-taorec = taorec(1: it);
