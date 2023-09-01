@@ -10,7 +10,7 @@ function ybar = Differ(y,delta)
 %  ybar: derivative of y
 %
 % Author: Yuan JIANG
-% Time: 2023-07-30
+% Time: 2023-08-31
 
 L = length(y);
 ybar = (y(3:end) - y(1:end-2)) / (2*delta);
