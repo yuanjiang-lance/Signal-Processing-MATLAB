@@ -40,7 +40,7 @@ e2 = -2 * e;
 
 D = spdiags([e e2 e], 0:2, N-2, N); % 2nd-order difference operator, matrix D in original paper
 Ddoub = D'*D;   % matrix D'*D
-spzeros = spdiags([zeros(N, 1)], 0, N-2, N);
+spzeros = spdiags(zeros(N, 1), 0, N-2, N);
 PHI = [D spzeros; spzeros D];   % matrix PHI in original paper
 PHIdoub = PHI' * PHI;   % matrix PHI'*PHI
 
@@ -69,12 +69,13 @@ while (sDif > tol && it <= maxit)
     Sigitset(it, :) = Sigm;
     
     % IF refinement
-    alpham  = ym(1: N)';
-    betam   = ym(N+1: end)';     % two demodulated quadrature signals
+    alpham  = ym(1: N);
+    betam   = ym(N+1: end);     % two demodulated quadrature signals
     dalpham = Differ(alpham, 1/Fs);
     dbetam  = Differ(betam, 1/Fs);  % derivative of demodulated signals
     dIF = (betam.*dalpham - alpham.*dbetam) ./ (2*pi* (alpham.^2 + betam.^2));
-    IF = IF + (1/mu*Ddoub + speye(N)) \ dIF';
+    dIF = (1/mu*Ddoub + speye(N)) \ dIF;
+    IF = IF + dIF.';
     IFitset(it, :) = IF;
     
     % bandwith adaptation
@@ -92,5 +93,5 @@ end
 it = it - 1;    % final iteration
 IFest = IFitset(it, :);   % estimated IF
 Sigest = Sigitset(it, :); % estimated signal component
-IAest = sqrt(alpham.^2 + betam.^2); % estimated IA
+IAest = sqrt(alpham.^2 + betam.^2).'; % estimated IA
 taorec = taorec(1: it);

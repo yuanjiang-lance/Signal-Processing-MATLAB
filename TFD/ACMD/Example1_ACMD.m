@@ -15,7 +15,9 @@ IF2 = 250 - 20*sin(40*pi*t);
 Sig = Sig1 + Sig2;
 
 sigshow(Sig, Fs);
-[Spec, f] = mySTFT(Sig, Fs, 512, 32);
+[f, fftSpec] = myfft(Sig, Fs);
+fftshow(f, fftSpec);
+Spec = mySTFT(Sig, Fs, 512, 32);
 stftshow(t, f, Spec);
 
 %% Parameter Setting
@@ -24,7 +26,13 @@ mu = 1e-4;
 tol = 1e-8;
 
 %% Component 1 Extraction
+[~, findex1] = max(fftSpec);
+f1peak = f(findex1);
+iniIF1 = f1peak * ones(1, length(Sig));
 
+[IFest1, Sigest1, IAest1] = ACMD(Sig, Fs, iniIF1, tao, mu, tol);
+
+%%
 
 
 %% Remove Path
