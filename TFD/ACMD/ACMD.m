@@ -1,6 +1,6 @@
 function [IFest, Sigest, IAest] = ACMD(Sig, Fs, iniIF, tao, mu, tol, maxit)
 %
-% Adaptive Chirp Mode Decomposition (ACMD) without bandwidth adaptation
+% Adaptive Chirp Mode Decomposition (ACMD) without bandwidth adaptation 
 %
 % Joint-estimation scheme is also integrated in this function, so it could
 % extract multiple components simultaneously. If you want to use recursive
