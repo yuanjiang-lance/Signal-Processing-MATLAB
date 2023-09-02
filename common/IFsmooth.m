@@ -3,7 +3,7 @@ function newIF = IFsmooth(IF, mu)
 % Curve smooth for instantaneous frequencies (IFs)
 %
 % ------------- Input ---------------
-%  IF: instantamous frequencies, each IF must be listed in one row
+%  IF: instantaneous frequencies, each IF must be listed in one row
 %  mu: smooth degree controlling parameter, smaller beta results in smoother output IF
 %
 % ------------- Output --------------

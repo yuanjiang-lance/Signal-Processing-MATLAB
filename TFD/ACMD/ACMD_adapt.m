@@ -1,6 +1,6 @@
 function [IFest, Sigest, IAest, taorec] = ACMD_adapt(Sig, Fs, iniIF, tao0, mu, tol, maxit)
 %
-% Adaptive Chipr Mode Decomposition (ACMD) with bandwidth adaptation
+% Adaptive Chirp Mode Decomposition (ACMD) with bandwidth adaptation
 %
 % ------------- Input ---------------
 %  Sig: measured signal, one row/colum vector
