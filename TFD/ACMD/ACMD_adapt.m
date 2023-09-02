@@ -19,7 +19,7 @@ function [IFest, Sigest, IAest, taorec] = ACMD_adapt(Sig, Fs, iniIF, tao0, mu, t
 %  taorec: the recording of tao (bandwidth controlling parameter) in each iteration
 %
 % Notations of each parameter and variable align with the notations in
-% original paper, which helps users to better understanding the core
+% original paper, which helps users to better understand the core
 % concept of the algorithm.
 %
 % Author: Yuan JIANG
