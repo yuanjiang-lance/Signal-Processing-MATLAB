@@ -46,7 +46,7 @@ D = spdiags([e e2 e], 0:2, N-2, N); % 2nd-order difference operator, matrix D in
 Ddoub = D'*D;   % matrix D'*D
 spzeros = spdiags(zeros(N, 1), 0, N-2, N);
 PHIm = [D spzeros; spzeros D];   % matrix PHI in original paper
-PHI = kron(eye(M), PHIm);   % Due to the joint-estimation scheme, all PHIm shoud be integrated in diagnal
+PHI = kron(eye(M), PHIm);   % Due to the joint-estimation scheme, all PHIm should be integrated in diagonal
 PHIdoub = PHI' * PHI;   % matrix PHI'*PHI
 
 IFitset = zeros(M, N, maxit);    % Estimated IFs in each iteration
