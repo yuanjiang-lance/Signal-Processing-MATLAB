@@ -1,4 +1,4 @@
-function [IFest, Sigest, IAest, taorec] = ACMD_adapt(Sig, Fs, iniIF, tao0, mu, tol, maxit)
+function [Sigest, IFest, IAest, taorec] = ACMD_adapt(Sig, Fs, iniIF, tao0, mu, tol, maxit)
 %
 % Adaptive Chirp Mode Decomposition (ACMD) with bandwidth adaptation
 %

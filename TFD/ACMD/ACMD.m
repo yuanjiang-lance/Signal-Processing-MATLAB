@@ -1,4 +1,4 @@
-function [IFest, Sigest, IAest] = ACMD(Sig, Fs, iniIF, tao, mu, tol, maxit)
+function [Sigest, IFest, IAest] = ACMD(Sig, Fs, iniIF, tao, mu, tol, maxit)
 %
 % Adaptive Chirp Mode Decomposition (ACMD) without bandwidth adaptation 
 %

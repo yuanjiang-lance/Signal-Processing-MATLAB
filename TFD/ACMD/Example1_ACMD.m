@@ -30,7 +30,7 @@ tol = 1e-8;
 f1peak = f(findex1);
 iniIF1 = f1peak * ones(1, length(Sig));
 
-[IFest1, Sigest1, IAest1] = ACMD(Sig, Fs, iniIF1, tao, mu, tol);
+[Sigest1, IFest1, IAest1] = ACMD(Sig, Fs, iniIF1, tao, mu, tol);
 
 %% Component 2 Extraction
 SigRes = Sig - Sigest1;
@@ -39,7 +39,7 @@ SigRes = Sig - Sigest1;
 f2peak = f(findex2);
 iniIF2 = f2peak * ones(1, length(Sig));
 
-[IFest2, Sigest2, IAest2] = ACMD(SigRes, Fs, iniIF2, tao, mu, tol);
+[Sigest2, IFest2, IAest2] = ACMD(SigRes, Fs, iniIF2, tao, mu, tol);
 
 %% Estimated IF
 figure(101), hold on, box on;
