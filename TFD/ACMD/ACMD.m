@@ -19,8 +19,8 @@ function [Sigest, IFest, IAest] = ACMD(Sig, Fs, iniIF, tao, mu, tol, maxit)
 %  maxit: maximum iteration number to avoid dead loop, default 300
 %
 % ------------- Output ---------------
-%  IFest: estimated IFs, each IF lies in one row
 %  Sigest: estimated signal modes, each mode lie in one row
+%  IFest: estimated IFs, each IF lies in one row
 %  IAest: estimated instantanous amplitudes (IAs), equivalent to the envelope, each IA lies in one row
 %
 % Notations of each parameter and variable align with the notations in
@@ -35,7 +35,7 @@ if nargin < 7, maxit = 300; end
 if length(Sig) ~= size(iniIF, 2)
     error('The length of measured signal and initial IF must be equal!');
 end
-if size(Sig, 1) > size(Sig, 2), Sig = Sig.'; end
+if size(Sig, 2) > size(Sig, 1), Sig = Sig.'; end
 
 [M, N] = size(iniIF);    % N is the signal length (must equal to the length of IF), M is the mode number
 t = (0: N-1) / Fs;
@@ -75,7 +75,7 @@ while (sDif > tol && it <= maxit)
     end
     Kdoub = K' * K;
     
-    y = (1/tao * PHIdoub + Kdoub) \ (K' * Sig(:)); 
+    y = (1/tao * PHIdoub + Kdoub) \ (K' * Sig); 
     
     for i = 1: M
         % updating demodulated sigals

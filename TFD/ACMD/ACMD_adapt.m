@@ -13,8 +13,8 @@ function [Sigest, IFest, IAest, taorec] = ACMD_adapt(Sig, Fs, iniIF, tao0, mu, t
 %  maxit: maximum iteration number to avoid dead loop, default 300
 %
 % ------------- Output ---------------
-%  IFest: estimated IF
 %  Sigest: estimated signal mode
+%  IFest: estimated IF
 %  IAest: estimated instantanous amplitude (IA), equivalent to the envelope
 %  taorec: the recording of tao (bandwidth controlling parameter) in each iteration
 %
@@ -30,7 +30,7 @@ if narin < 7, maxit = 300; end
 if length(Sig) ~= length(iniIF)
     error('The length of measured signal and initial IF must be equal!');
 end
-if size(Sig, 1) > size(Sig, 2), Sig = Sig.'; end
+if size(Sig, 2) > size(Sig, 1), Sig = Sig.'; end
 if size(iniIF, 1) > size(iniIF, 2), iniIF = iniIF.'; end
 
 N = length(Sig);    % signal length (must equal to length(iniIF))
@@ -64,7 +64,7 @@ while (sDif > tol && it <= maxit)
     Kmdoub = Km' * Km;
     
     % updating demodulated sigals
-    ym = (1/tao * PHIdoub + Kmdoub) \ (Km' * Sig(:)); 
+    ym = (1/tao * PHIdoub + Kmdoub) \ (Km' * Sig); 
     Sigm = Km * ym;
     Sigitset(it, :) = Sigm;
     
@@ -79,7 +79,7 @@ while (sDif > tol && it <= maxit)
     IFitset(it, :) = IF;
     
     % bandwith adaptation
-    tao = tao * (Sigm'*Sigm) / (Sigm'*Sig(:));
+    tao = tao * (Sigm'*Sigm) / (Sigm'*Sig);
     taorec(it) = tao;
     
     % convergence criterion
