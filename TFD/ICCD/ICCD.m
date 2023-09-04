@@ -23,7 +23,7 @@ function [Sigest, IFest, IAest] = ICCD(Sig, Fs, iniIF, orderIA, lambda, orderIF)
 %  IAest: estimated instantanous amplitudes (IAs), equivalent to the envelope, each IA lies in one row
 %
 % Author: Yuan JIANG
-% Time: 2023-09-03
+% Time: 2023-09-04
 
 %% Initialization
 if nargin < 6, fineIF = true; else, fineIF = false; end
@@ -122,6 +122,24 @@ end
 
 t = (0: N-1) / Fs;
 f0 = Fs / (2*N);    % base frequency
+IFfit = zeros(M, N);
+phase = zeros(M, N);
 
+for i = 1: M
+    H = zeros(N, 2*orderIF+1);      
+    HI = zeros(N, 2*orderIF+1);     % integral matrix of H
+    for j = 1: orderIF+1
+        H(:, j) = cos(2*pi*f0*(j-1)*t);
+        HI(:, j) = 1/(2*pi*f0*(j-1)) * sin(2*pi*f0*(j-1)*t);
+    end
+    for j = orderIF+2: 2*orderIF+1
+        H(:, j) = sin(2*pi*f0*(j-orderIF-1)*t);
+        HI(:, j) = -1/(2*pi*f0*(j-orderIF-1)) * cos(2*pi*f0*(j-orderIF-1)*t);
+    end
+    I = speye(size(H, 2));
+    y = (H'*H + lambda*I) \ (H'*iniIF(i, :).');
+    IFfit(i, :) = H*y;
+    phase(i, :) = 2*pi*HI*y;
+end
 
 end
