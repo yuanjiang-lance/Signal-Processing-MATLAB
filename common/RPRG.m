@@ -3,12 +3,12 @@ function [index, intersct] = RPRG(index, thre)
 % Ridge path regrouping (RPRG) 
 %
 % -------------- Input ------------------
-%  iniindex: initial time/frequency indexes of ridge curves, each curve indexes should be listed in one row
+%  index: initial time/frequency indexes of ridge curves, each curve indexes should be listed in one row
 %  thre: threshold for finding the intersection intervals
 %
 % -------------- Output -----------------
 %  index: final curve indexes after regrouping
-%  intersect: detected intersetction intervals for ridge curves
+%  intersct: detected intersetction intervals for ridge curves
 %
 % Author: Yuan JIANG
 % Time: 2023-09-06
