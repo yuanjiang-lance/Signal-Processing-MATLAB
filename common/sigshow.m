@@ -11,6 +11,7 @@ function sigshow(Sig, Fs)
 
 N = length(Sig);
 t = (0: N-1)/Fs;
+Sig = real(Sig);
 
 figure
 set(gcf,'Position',[20 100 415 200]);	    
