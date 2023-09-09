@@ -8,9 +8,9 @@ function [Sigest, IFest, IAest] = ICCD(Sig, Fs, iniIF, orderIA, lambda, orderIF)
 %  iniIF: initial instantaneous frequencies (IFs), each IF lies in one row
 %         ATTENTION: The length of iniIF and Sig must be equal
 %  orderIA: the order of Fourier series covering instantaneous amplitude (IA). 
-%           Higer orderIA results in larger bandwidth
+%           Higher orderIA results in larger bandwidth
 %  lambda: Tikhonov regularization parameter. 
-%          Higer lambda results in insensitivity of noise
+%          Higher lambda results in insensitivity of noise
 %  orderIF (optional): the order of Fourier series for IF fitting. 
 %                      If orderIF is omitted, iniIF should be smoothed IFs with
 %                      high accuracy (e.g. after fitting or low-pass
