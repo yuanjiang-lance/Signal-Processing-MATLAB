@@ -89,7 +89,7 @@ for i = 1: M
         IAest(i, :) = K * y((i-1)*(2*orderIA+1)+1: i*(2*orderIA+1));
     end
 end
-
+IAest = abs(IAest);
 end
 
 %%
@@ -126,15 +126,18 @@ IFfit = zeros(M, N);
 phase = zeros(M, N);
 
 for i = 1: M
-    H = zeros(N, 2*orderIF+1);      
-    HI = zeros(N, 2*orderIF+1);     % integral matrix of H
-    for j = 1: orderIF+1
+    order = orderIF(i);
+    H = zeros(N, 2*order+1);      
+    HI = zeros(N, 2*order+1);     % integral matrix of H
+    H(:, 1) = ones(N, 1);
+    HI(:, 1) = t;
+    for j = 2: order+1
         H(:, j) = cos(2*pi*f0*(j-1)*t);
         HI(:, j) = 1/(2*pi*f0*(j-1)) * sin(2*pi*f0*(j-1)*t);
     end
-    for j = orderIF+2: 2*orderIF+1
-        H(:, j) = sin(2*pi*f0*(j-orderIF-1)*t);
-        HI(:, j) = -1/(2*pi*f0*(j-orderIF-1)) * cos(2*pi*f0*(j-orderIF-1)*t);
+    for j = order+2: 2*order+1
+        H(:, j) = sin(2*pi*f0*(j-order-1)*t);
+        HI(:, j) = -1/(2*pi*f0*(j-order-1)) * cos(2*pi*f0*(j-order-1)*t);
     end
     I = speye(size(H, 2));
     y = (H'*H + lambda*I) \ (H'*iniIF(i, :).');
