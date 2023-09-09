@@ -113,7 +113,7 @@ function [IFfit, phase] = IFfit_overFourier(iniIF, Fs, orderIF, lambda)
 
 if nargin < 4, lambda = 5e-5; end
 [M, N] = size(iniIF);
-if length(orderIF) ~= N && length(orderIF) ~= 1
+if length(orderIF) ~= M && length(orderIF) ~= 1
     error('The length of orderIF must be 1 or equal to the number of IFs.');
 end
 if length(orderIF) == 1
