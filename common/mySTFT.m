@@ -3,7 +3,7 @@ function [Spec, f, t] = mySTFT(Sig, SampFreq, Nfbin, WinLen)
 % Calculating the Short Time Fourier Transform
 %
 % ---------- Input ------------
-%  Sig: the signal to be analyzed, one row/colum
+%  Sig: the signal to be analyzed
 %  SampFreq: sampling frequency (Hz)
 %  Nfbin: the number of frequency bins 
 %  WinLen: the window length to locate signal in time domain
@@ -14,10 +14,11 @@ function [Spec, f, t] = mySTFT(Sig, SampFreq, Nfbin, WinLen)
 %  t: time bins
 %
 % Author: Yuan JIANG
-% Time: 2023-07-30
+% Time: 2024-01-26
 
-if size(Sig, 1) < size(Sig, 2), Sig = Sig.'; end
-if (isreal(Sig)), Sig = hilbert(Sig); end
+if (isreal(Sig))
+Sig = hilbert(Sig);
+end
 
 SigLen = length(Sig);
 N = 2 * Nfbin - 1;
@@ -42,7 +43,7 @@ for iLoop = 1:SigLen
     Spec(1:length(rSig),iLoop) = rSig;
 end
 
-Spec = fftshift(fft(Spec),1); % Calculating the Fourier Transform of each windowed signal and shifting the results.
+Spec = fftshift(fft(Spec),1) / length(rSig); % Calculating the Fourier Transform of each windowed signal and shifting the results.
 
 f = linspace(-SampFreq/2,SampFreq/2, N);
 t = (0: SigLen-1)/SampFreq;
