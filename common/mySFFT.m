@@ -35,15 +35,13 @@ Spec = zeros(SigLen, fft_len);
 conjSpec = Spec;
 
 for iLoop = 1:fft_len
-    
-    %waitbar(iLoop/fft_len,wait);
    
     tau = -min([round(fft_len/2)-1,Lh,iLoop-1]):min([round(fft_len/2)-1,Lh,fft_len-iLoop]);  % signal span
     temp = floor(iLoop + tau);
     sSig = sigfft(temp);
 
     temp1 = floor(Lh+1+tau);    % window span
-    sSig = sSig .* conj(WinFun(temp1)); % Z(t)* complex conjugate of window?
+    sSig = sSig .* conj(WinFun(temp1)); % X(f)* complex conjugate of window
     Spec(1:length(sSig),iLoop) = sSig;  % windowed analytic signal
     conjSpec(:,iLoop)  =  fliplr(Spec(:,iLoop));
 end
